@@ -1,0 +1,250 @@
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+
+}
+@{
+    MyDbContext db = new MyDbContext();
+    var thethao = db.HangHoas.Where(p => p.MaLoai == 2).OrderByDescending(x => x.MaHh).Take(4);
+
+    var giayda = db.HangHoas.Where(p => p.MaLoai == 1).OrderByDescending(x => x.MaHh).Take(4);
+
+    var dabong = db.HangHoas.Where(p => p.MaLoai == 3).OrderByDescending(x => x.MaHh).Take(4);
+
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    @{
+        ViewData["Title"] = "Trang Chủ";
+    }
+    @section OGIndex {
+        <!--share-->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Shop Giày Nam SHOP3">
+        <meta property="og:description" content="Chuyên cung cấp các loại giày nam fashion">
+        <meta property="og:url" content="http://www.shop3.somee.com/">
+        <meta property="og:site_name" content="www.shop3.somee.com">
+        <meta property="og:image" content="http://www.shop3.somee.com/img/logo.png">
+
+    }
+
+</head>
+<body>
+
+    <!-- Start slider -->
+    <section id="aa-slider">
+        <div class="aa-slider-area">
+            <div id="sequence" class="seq">
+                <div class="seq-screen">
+                    <ul class="seq-canvas">
+                        <!-- single slide item -->
+                        <li>
+                            <div class="seq-model">
+                                <img data-seq src="~/img/banner1.png" alt="Men slide img" />
+                            </div>
+                            <div class="seq-title">
+
+                                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                            </div>
+                        </li>
+                        <!-- single slide item -->
+                        <li>
+                            <div class="seq-model">
+                                <img data-seq src="~/img/banner2.png" alt="Wristwatch slide img" />
+                            </div>
+                            <div class="seq-title">
+
+                                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                            </div>
+                        </li>
+                        <!-- single slide item -->
+                        <li>
+                            <div class="seq-model">
+                                <img data-seq src="~/img/banner3.jpg" alt="Women Jeans slide img" />
+                            </div>
+                            <div class="seq-title">
+
+                                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- slider navigation btn -->
+                <fieldset class="seq-nav" aria-controls="sequence" aria-label="Slider buttons">
+                    <a type="button" class="seq-prev" aria-label="Previous"><span class="fa fa-angle-left"></span></a>
+                    <a type="button" class="seq-next" aria-label="Next"><span class="fa fa-angle-right"></span></a>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+    <!-- / slider -->
+    <!-- popular section -->
+    <section id="aa-popular-category">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="aa-popular-category-area">
+                            <!-- start prduct navigation -->
+                            <ul class="nav nav-tabs aa-products-tab">
+                                <li class="active"><a href="#tt" data-toggle="tab">Giày Thể Thao</a></li>
+                                <li><a href="#gd" data-toggle="tab">Giày Da</a></li>
+                                <li><a href="#db" data-toggle="tab">Giày Đá Bóng</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <!-- Start men popular category -->
+                                <div class="tab-pane fade in active" id="tt">
+                                    <ul class="aa-product-catg aa-popular-slider">
+                                        <!-- start single product item -->
+                                        @{
+                                            foreach (var item in thethao)
+                                            {
+                                                <li>
+                                                    <figure>
+                                                        <a class="aa-product-img" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><img src="~/img/@item.Hinh" alt="polo shirt img"></a>
+                                                        <a class="aa-add-card-btn" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                        <figcaption>
+                                                            <h4 class="aa-product-title"><a asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url">@item.TenHh</a></h4>
+                                                            <span class="aa-product-price">@String.Format("{0:0,0 đ}", item.Price)</span>
+                                                            <span class="aa-product-price"> <del>@String.Format("{0:0,0 đ}", item.DonGia)</del></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="aa-product-hvr-content">
+                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+
+                                                    </div>
+                                                    @{
+                                                        double a = (double)item.GiamGia * 100;
+
+                                                    }
+                                                    <!-- product badge -->
+                                                    <span class="aa-badge aa-sold-out" href="#">Sale <strong>@a</strong> %</span>
+                                                </li>
+                                            }
+                                        }
+                                        <!-- start single product item -->
+
+                                    </ul>
+
+                                </div>
+                                <!-- / popular product category -->
+                                <!-- start featured product category -->
+                                <div class="tab-pane fade" id="gd">
+                                    <ul class="aa-product-catg aa-featured-slider">
+                                        <!-- start single product item -->
+                                        @{
+                                            foreach (var item in giayda)
+                                            {
+                                                <li>
+                                                    <figure>
+                                                        <a class="aa-product-img" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><img src="~/img/@item.Hinh" alt="polo shirt img"></a>
+                                                        <a class="aa-add-card-btn" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                        <figcaption>
+                                                            <h4 class="aa-product-title"><a asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url">@item.TenHh</a></h4>
+                                                            <span class="aa-product-price">@String.Format("{0:0,0 đ}", item.Price)</span>
+                                                            <span class="aa-product-price"> <del>@String.Format("{0:0,0 đ}", item.DonGia)</del></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="aa-product-hvr-content">
+                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+
+                                                    </div>
+                                                    @{
+                                                        double aa = (double)item.GiamGia * 100;
+
+                                                    }
+                                                    <!-- product badge -->
+                                                    <span class="aa-badge aa-sold-out" href="#">Sale <strong>@aa</strong> %</span>
+                                                </li>
+                                            }
+                                        }
+
+                                    </ul>
+
+
+                                </div>
+
+                                <!-- / featured product category -->
+                                <!-- start latest product category -->
+                                <div class="tab-pane fade" id="db">
+                                    <ul class="aa-product-catg aa-latest-slider">
+                                        <!-- start single product item -->
+                                        @{
+                                            foreach (var item in dabong)
+                                            {
+                                                <li>
+                                                    <figure>
+                                                        <a class="aa-product-img" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><img src="~/img/@item.Hinh" alt="polo shirt img"></a>
+                                                        <a class="aa-add-card-btn" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                        <figcaption>
+                                                            <h4 class="aa-product-title"><a asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url">@item.TenHh</a></h4>
+                                                            <span class="aa-product-price">@String.Format("{0:0,0 đ}", item.Price)</span>
+                                                            <span class="aa-product-price"> <del>@String.Format("{0:0,0 đ}", item.DonGia)</del></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="aa-product-hvr-content">
+                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+
+                                                    </div>
+                                                    @{
+                                                        double aaa = (double)item.GiamGia * 100;
+
+                                                    }
+                                                    <!-- product badge -->
+                                                    <span class="aa-badge aa-sold-out" href="#">Sale <strong>@aaa</strong> %</span>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+
+                                </div>
+
+                                <!-- / latest product category -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / popular section -->
+    <!-- Support section -->
+    <section id="aa-support">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="aa-support-area">
+                        <!-- single support -->
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="aa-support-single">
+                                <span class="fa fa-truck"></span>
+                                <h4>FREE SHIPPING</h4>
+
+                            </div>
+                        </div>
+                        <!-- single support -->
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="aa-support-single">
+                                <span class="fa fa-clock-o"></span>
+                                <h4>7 DAYS MONEY BACK</h4>
+
+                            </div>
+                        </div>
+                        <!-- single support -->
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="aa-support-single">
+                                <span class="fa fa-phone"></span>
+                                <h4>SUPPORT 24/7</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

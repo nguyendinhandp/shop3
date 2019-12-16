@@ -1,0 +1,207 @@
+﻿@model SHOP3.Models.ChiTietHH
+@{
+    ViewData["Title"] = @Model.HH.TenHh;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    @section OGDetails {
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="@Model.HH.TenHh">
+        <meta property="og:description" content="Sản phẩm chất lượng, chính hãng, giá cả siêu hợp lý.">
+        <meta property="og:site_name" content="www.econhom3.somee.com">
+        <meta property="og:image" content="@Model.HH.image">
+        <meta property="og:image:height" content="150px">
+        <meta property="og:image:width" content="150px">
+    }
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5de644b7834b400012f95aeb&product=inline-share-buttons"></script>
+</head>
+<body>
+    <!-- product category -->
+    <section id="aa-product-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="aa-product-details-area">
+                        <div class="aa-product-details-content">
+                            <div class="row">
+                                <!-- Modal view slider -->
+                                <div class="col-md-5 col-sm-5 col-xs-12">
+                                    <div class="aa-product-view-slider">
+                                        <div id="demo-1" class="simpleLens-gallery-container">
+                                            <a class="aa-product-img" href="#"><img src="~/img/@Model.HH.Hinh"></a>
+                                            @{
+                                                double aa = (double)Model.HH.GiamGia * 100;
+
+                                            }
+                                            <!-- product badge -->
+                                            <span class="aa-badge aa-sold-out" href="#">Sale <strong style="color:red">@aa  %</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal view content -->
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <div class="aa-product-view-content">
+                                        <h3><strong>@Model.HH.TenHh</strong></h3>
+                                        <div class="aa-price-block">
+                                            <span class="aa-product-view-price"> Giá: <strong>@String.Format("{0:0,0 đ}", Model.HH.Price)</strong>  <del style="color:red">@String.Format("{0:0,0 đ}", Model.HH.DonGia)</del></span>
+                                            <p class="aa-product-avilability">Trạng thái: <span>Còn hàng</span></p>
+                                        </div>
+                                        <p>Mô tả: @Model.HH.MoTa</p>
+                                        <p class="aa-prod-category">
+                                            Loại:
+                                            @{
+                                                if (Model.HH.MaLoai == 1)
+                                                {
+                                                    <a asp-action="ShowGiayDa" asp-controller="HangHoas"> Giày Da</a>
+                                                }
+                                                else if (Model.HH.MaLoai == 2)
+                                                {
+                                                    <a asp-action="ShowGiayTheThao" asp-controller="HangHoas"> Giày Thể Thao</a>
+                                                }
+                                                else if (Model.HH.MaLoai == 3)
+                                                {
+                                                    <a asp-action="ShowGiayDaBong" asp-controller="HangHoas"> Giày Đá Bóng</a>
+                                                }
+
+
+                                            }
+
+                                        </p>
+                                        <p class="aa-prod-category">
+                                            Thương Hiệu:
+                                            @{
+                                                if (Model.HH.MaTH == 1)
+                                                {
+                                                    <a asp-action="ShowNobita" asp-controller="HangHoas"> Nobita</a>
+                                                }
+                                                else if (Model.HH.MaTH == 2)
+                                                {
+                                                    <a asp-action="ShowXuka" asp-controller="HangHoas"> Xuka</a>
+                                                }
+                                                else if (Model.HH.MaTH == 3)
+                                                {
+                                                    <a asp-action="ShowChaien" asp-controller="HangHoas"> Chaien</a>
+                                                }
+                                                else if (Model.HH.MaTH == 4)
+                                                {
+                                                    <a asp-action="ShowDoremon" asp-controller="HangHoas"> Doremon</a>
+                                                }
+
+
+                                            }
+
+                                        </p>
+
+                                        <form asp-controller="Cart" asp-action="Buy" asp-route-id="@Model.HH.MaHh" method="get">
+                                            <input type="hidden" value="@Model.HH.MaHh" name="mahh" />
+
+                                            <span>
+                                                Size :
+                                                <br />
+                                                <input type="number" min="38" step="1" max="43" name="s" value="41" style="text-align: right; width:50px" />
+                                            </span>
+
+                                            <br />
+
+                                            <div class="aa-prod-view-bottom">
+                                                <button type="submit" class="aa-add-to-cart-btn" style="width:185px;">Thêm Vào Giỏ</button>
+                                            </div>
+
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <!-- product loai -->
+                        <div class="aa-product-related-item">
+                            <h3>Sản Phẩm Cùng Loại</h3>
+                            <ul class="aa-product-catg aa-popular-slider">
+                                <!-- start single product item -->
+                                @{ foreach (var item in Model.HHCungLoai.OrderByDescending(x => x.MaHh).Take(3))
+                                    {
+                                        <li>
+                                            <figure>
+                                                <a class="aa-product-img" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><img src="~/img/@item.Hinh" alt="polo shirt img"></a>
+                                                <a class="aa-add-card-btn" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                <figcaption>
+                                                    <h4 class="aa-product-title"><a asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url">@item.TenHh</a></h4>
+                                                    <span class="aa-product-price">@String.Format("{0:0,0 đ}", item.Price)</span>
+                                                    <span class="aa-product-price"> <del>@String.Format("{0:0,0 đ}", item.DonGia)</del></span>
+                                                </figcaption>
+                                            </figure>
+                                            <div class="aa-product-hvr-content">
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+
+                                            </div>
+                                            @{
+                                                double a = (double)item.GiamGia * 100;
+                                                item.GiamGia = a;
+                                            }
+                                            <!-- product badge -->
+                                            <span class="aa-badge aa-sold-out" href="#">Sale <strong>@a</strong> %</span>
+                                        </li>
+                                    }
+                                }
+
+
+
+                            </ul>
+
+                        </div>
+
+                        <!-- Related thuong hieu -->
+                        <div class="aa-product-related-item">
+                            <h3>Sản Phẩm Cùng Thương Hiệu</h3>
+                            <ul class="aa-product-catg aa-popular-slider">
+                                <!-- start single product item -->
+                                @{ foreach (var item in Model.HHCungTH.OrderByDescending(x => x.MaTH).Take(3))
+                                    {
+                                        <li>
+                                            <figure>
+                                                <a class="aa-product-img" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><img src="~/img/@item.Hinh" alt="polo shirt img"></a>
+                                                <a class="aa-add-card-btn" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                <figcaption>
+                                                    <h4 class="aa-product-title"><a asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url">@item.TenHh</a></h4>
+                                                    <span class="aa-product-price">@String.Format("{0:0,0 đ}", item.Price)</span>
+                                                    <span class="aa-product-price"> <del>@String.Format("{0:0,0 đ}", item.DonGia)</del></span>
+                                                </figcaption>
+                                            </figure>
+                                            <div class="aa-product-hvr-content">
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+
+                                            </div>
+                                            @{
+                                                double b = (double)item.GiamGia * 100;
+                                                item.GiamGia = b;
+                                            }
+                                            <!-- product badge -->
+                                            <span class="aa-badge aa-sold-out" href="#">Sale <strong>@b</strong> %</span>
+                                        </li>
+                                    }
+                                }
+
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / product category -->
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<SHOP3.Models.Item>
+@{
+    ViewData["Title"] = "Giỏ Hàng";
+}
+
+<!-- Cart view section -->
+<section id="cart-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+                    <div class="cart-view-table">
+                        <form action="">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Hình</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Số lượng</th>
+                                            <th>Size</th>
+                                            <th>Đơn giá</th>
+                                            <th>Thành tiền</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.cart)
+                                        {
+                                            <tr>
+                                                <td class="text-center"><img src="~/img/@item.Hinh" width="70" height="60" /> </td>
+                                                <td><a asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"> @item.TenHh </a> </td>
+                                                <td width="80px">
+                                                    <form asp-action="Update" asp-controller="Cart" asp-route-id="@item.MaHh" method="get">
+                                                        <input type="hidden" name="id" value="@item.MaHh" />
+                                                        <input type="hidden" name="s" value="@item.Size" />
+                                                        <input type="number" min="1" step="1" name="sl" value="@item.SoLuong" style="width:70px; text-align: right;" />
+                                                        <button type="submit" class="btn btn-primary btn-sm" width="80px"> Cập nhật </button>
+                                                    </form>
+                                                </td>
+                                                <td> @item.Size </td>
+                                                <td> @String.Format("{0:0,0 đ}", item.DonGia) </td>
+                                                <td> @String.Format("{0:0,0 đ}", item.ThanhTien) </td>
+                                                <td>
+                                                    <form asp-action="Remove" asp-controller="Cart" asp-route-id="@item.MaHh" method="get">
+                                                        <input type="hidden" name="id" value="@item.MaHh" />
+                                                        <input type="hidden" name="s" value="@item.Size" />
+                                                        
+                                                        <button type="submit" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                        <!-- Cart Total view -->
+                        <div class="cart-view-total">
+                            
+                            <table class="aa-totals-table">
+                                <tbody>
+
+                                    <tr>
+                                        <th>Tổng Tiền</th>
+                                        <td>@String.Format("{0:0,0 đ}", ViewBag.total)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="#" class="aa-cart-view-btn">Thanh Toán</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Cart view section -->

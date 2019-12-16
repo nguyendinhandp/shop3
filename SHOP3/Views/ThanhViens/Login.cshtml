@@ -1,0 +1,38 @@
+﻿@model SHOP3.Models.ThanhVien
+@{
+    ViewData["Title"] = "Login";
+
+}
+<!-- login -->
+<section id="aa-myaccount">
+<div class="container" style="float: left;  position: relative;    left:40%;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="aa-myaccount-area">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="aa-myaccount-login">
+                            <h4>Đăng Nhập</h4>
+                            <form method="post" asp-controller="ThanhViens" asp-action="Login" class="aa-login-form">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <label asp-for="TaiKhoan">Tên Đăng Nhập<span>*</span></label>
+                                <input asp-for="TaiKhoan" placeholder="Username or email">
+                                <span asp-validation-for="TaiKhoan"></span>
+
+                                <label asp-for="MatKhau">Mật Khẩu<span>*</span></label>
+                                <input asp-for="MatKhau" type="password" placeholder="Password">
+                                <span asp-validation-for="MatKhau"></span>
+
+                                <button type="submit" class="aa-browse-btn">Đăng Nhập</button>
+                                <label class="rememberme" for="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
+
+                            </form>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

@@ -1,0 +1,80 @@
+﻿@{
+    MyDbContext db = new MyDbContext();
+    var giayda = db.HangHoas.Where(p => p.MaLoai == 3);
+
+}
+
+@{
+    ViewData["Title"] = "Giày Đá Bóng";
+}
+<section id="aa-product-category">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                <div class="aa-product-catg-content">
+                    <div class="aa-product-catg-body">
+                        <ul class="aa-product-catg">
+                            @{
+                                foreach (var item in giayda)
+                                {
+                                    <li>
+                                        <figure>
+                                            <a class="aa-product-img" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><img src="~/img/@item.Hinh" alt="polo shirt img"></a>
+                                            <a class="aa-add-card-btn" asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                            <figcaption>
+                                                <h4 class="aa-product-title"><a asp-action="Details" asp-controller="HangHoas" asp-route-id="@item.Url">@item.TenHh</a></h4>
+                                                <span class="aa-product-price">@String.Format("{0:0,0 đ}", item.Price)</span>
+                                                <span class="aa-product-price"> <del>@String.Format("{0:0,0 đ}", item.DonGia)</del></span>
+                                            </figcaption>
+                                        </figure>
+                                        <div class="aa-product-hvr-content">
+                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+
+                                        </div>
+                                        @{
+                                            double a = (double)item.GiamGia * 100;
+
+                                        }
+                                        <!-- product badge -->
+                                        <span class="aa-badge aa-sold-out" href="#">Sale <strong>@a</strong> %</span>
+                                    </li>
+                                }
+                            }
+
+
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+                <aside class="aa-sidebar">
+                    <!-- single sidebar -->
+                    <div class="aa-sidebar-widget">
+                        <h3>Loại Giày:</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="#">Giầy Đá Bóng</a></li>
+
+                        </ul>
+                    </div>
+                    <!-- single sidebar -->
+                    <div class="aa-sidebar-widget">
+                        <h3>Tags</h3>
+                        <div class="tag-cloud">
+
+                            <a href="#">Giày Sân Cỏ Nhân Tạo</a>
+                            <a href="#">Giày Đá Bóng</a>
+                            <a href="#">Giày Sân Cỏ Tự Nhiên</a>
+
+                        </div>
+                    </div>
+                    <!-- single sidebar -->
+
+
+                </aside>
+            </div>
+
+        </div>
+    </div>
+</section>

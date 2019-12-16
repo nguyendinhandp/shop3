@@ -1,0 +1,331 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html>
+<head>
+   
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin | @ViewData["Title"]</title>
+
+    <!--logo title-->
+    <link rel="shortcut icon" type="image/ico" href="~/img/logo.png" />
+    <link rel="icon" type="image/ico" href="~/img/logo.png" />
+    <link rel="apple-touch-icon" type="image/ico" href="~/img/logo.png" />
+
+
+    <!-- Font awesome -->
+    <link href="~/css/font-awesome.css" rel="stylesheet" asp-append-version="true">
+    <!-- Bootstrap -->
+    <link href="~/css/bootstrap.css" rel="stylesheet" asp-append-version="true">
+    <!-- SmartMenus jQuery Bootstrap Addon CSS -->
+    <link href="~/css/jquery.smartmenus.bootstrap.css" rel="stylesheet" asp-append-version="true">
+    <!-- Product view slider -->
+    <link rel="stylesheet" type="text/css" href="~/css/jquery.simpleLens.css" asp-append-version="true">
+    <!-- slick slider -->
+    <link rel="stylesheet" type="text/css" href="~/css/slick.css" asp-append-version="true">
+    <!-- price picker slider -->
+    <link rel="stylesheet" type="text/css" href="~/css/nouislider.css" asp-append-version="true">
+    <!-- Theme color -->
+    <link id="switcher" href="~/css/theme-color/default-theme.css" rel="stylesheet" asp-append-version="true">
+    <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+    <!-- Top Slider CSS -->
+    <link href="~/css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all" asp-append-version="true">
+
+    <!-- Main style sheet -->
+    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+<body>
+    <!--to top-->
+    <button onclick="topFunction()" id="myBtn"></button>
+    <script>
+        var mybutton = document.getElementById("myBtn");
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <!-- / to top-->
+    <!-- Start header section -->
+    <header id="aa-header">
+        <!-- start header top  -->
+        <div class="aa-header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-top-area">
+                            <!-- start header top left -->
+                            <div class="aa-header-top-left">
+                                <!-- start language -->
+                                <div class="aa-language">
+                                    <div class="dropdown">
+                                        <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1">
+                                            <img src="~/img/flag/vietnam.png" alt="english flag">VIỆT NAM
+                                            <span class="caret"></span>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <!-- / language -->
+                                <!-- start currency -->
+                                <div class="aa-currency">
+                                    <div class="dropdown">
+                                        <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1">
+                                            <i class="fa fa-dollar"></i>VND
+                                            <span class="caret"></span>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <!-- / currency -->
+                                <!-- start cellphone -->
+                                <div class="cellphone hidden-xs">
+                                    <p><span class="fa fa-phone"></span>00-25251325</p>
+                                </div>
+                                <!-- / cellphone -->
+                            </div>
+                            <!-- / header top left -->
+                            <div class="aa-header-top-right">
+                                <ul class="aa-head-top-nav-right">
+                                    @if (Context.Session.GetInt32("MaTv") != null)
+                                    {
+                                        <li><a asp-controller="ThanhViens" asp-action="Details" asp-route-id="@Context.Session.GetInt32("MaTv")">Tài Khoản</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-action="Create" asp-controller="ThanhViens">Đăng Ký</a></li>
+                                    }
+
+                                    <li class="hidden-xs"><a asp-action="Index" asp-controller="Cart">Giỏ Hàng</a></li>
+                                    <li class="hidden-xs"><a href="checkout.html">Thanh Toán</a></li>
+                                    @if (Context.Session.GetInt32("MaTv") == null)
+                                    {
+                                        <li><a asp-action="Login" asp-controller="ThanhViens">Đăng Nhập</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-action="Logout" asp-controller="ThanhViens" data-toggle="modal">Đăng Xuất</a></li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / header top  -->
+        <!-- start header bottom  -->
+        <div class="aa-header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-bottom-area">
+                            <!-- logo  -->
+                            <div class="aa-logo">
+                                <!-- Text based logo -->
+                                <a asp-action="Index" asp-controller="Home">
+                                    <span class="fa fa-shopping-cart"></span>
+                                    <p><strong>Shop</strong>3 <span>Shop Giày Nam</span></p>
+                                </a>
+                              
+                            </div>
+                            <!-- / logo  -->
+                            <!-- cart box -->
+                            <div class="aa-cartbox">
+                                <a class="aa-cart-link" asp-action="Index" asp-controller="Cart">
+                                    <span class="fa fa-shopping-basket"></span>
+                                    <span class="aa-cart-title">GIỎ HÀNG</span>
+                                  
+                                </a>
+                               
+                            </div>
+                            <!-- / cart box -->
+                            <!-- search box -->
+                            <div class="aa-search-box">
+                                @using (Html.BeginForm("SearchSP", "Home"))
+                                {
+                                    <input type="text" name="keysearch" placeholder="Tìm kiếm ">
+                                    <button type="submit"><span class="fa fa-search"></span></button>
+                                }
+                            </div>
+
+                            <!-- / search box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / header bottom  -->
+    </header>
+    <!-- menu -->
+    <section id="menu">
+        <div class="container">
+            <div class="menu-area">
+                <!-- Navbar -->
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <!-- Left nav -->
+                        <ul class="nav navbar-nav">
+                            <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                            <li>
+                                <a href="#">Loại Giày <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-action="ShowGiayDa" asp-controller="HangHoas">Giày Da</a></li>
+                                    <li><a asp-action="ShowGiayTheThao" asp-controller="HangHoas">Giày Thể Thao</a></li>
+                                    <li><a asp-action="ShowGiayDaBong" asp-controller="HangHoas">Giày Đá Bóng</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Thương Hiệu Giày <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-action="ShowNobita" asp-controller="HangHoas">Nobita</a></li>
+                                    <li><a asp-action="ShowXuka" asp-controller="HangHoas">Xuka</a></li>
+                                    <li><a asp-action="ShowChaien" asp-controller="HangHoas">Chaien</a></li>
+                                    <li><a asp-action="ShowDoremon" asp-controller="HangHoas">Doremon</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a asp-action="Contact" asp-controller="Home">Liên Hệ</a></li>
+                            <li>
+                                <a href="#">Admin: @Context.Session.GetString("TenTv") <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="ThanhViens" asp-action="Details" asp-route-id="@Context.Session.GetInt32("MaTv")">Tài Khoản Cá Nhân</a></li>
+                                    <li><a asp-action="Index" asp-controller="ThanhViens">Quản Lý Tài Khoản Trang</a></li>
+                                    <li><a asp-action="Index" asp-controller="HangHoas">Quản Lý Hàng Hóa</a></li>
+                                    <li><a asp-action="DonHang" asp-controller="HangHoas">Quản Lý Đơn Hàng</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / menu -->
+  
+    <div>
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+      
+
+    <footer id="aa-footer">
+        <!-- footer bottom -->
+        <div class="aa-footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-footer-top-area">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <h3>Menu</h3>
+                                        <ul class="aa-footer-nav">
+                                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                            <li><a asp-controller="HangHoas" asp-action="ShowGiayDa">Giày Da</a></li>
+                                            <li><a asp-controller="HangHoas" asp-action="ShowGiayTheThao">Giày Thể Thao</a></li>
+                                            <li><a asp-controller="HangHoas" asp-action="ShowGiayDaBong">Giày Đá Bóng</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <div class="aa-footer-widget">
+                                            <h3>Contact Us</h3>
+                                            <address>
+                                                <p> Quận 5, TP. HCM</p>
+                                                <p><span class="fa fa-phone"></span>2525-1325</p>
+                                                <p><span class="fa fa-envelope"></span>shop3@gmail.com</p>
+                                            </address>
+                                            <div class="aa-footer-social">
+                                                <a href="#"><span class="fa fa-facebook"></span></a>
+                                                <a href="#"><span class="fa fa-twitter"></span></a>
+                                                <a href="#"><span class="fa fa-google-plus"></span></a>
+                                                <a href="#"><span class="fa fa-youtube"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom -->
+        <div class="aa-footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-footer-bottom-area">
+                            <p>shop3</a></p>
+                            <div class="aa-footer-payment">
+                                <span class="fa fa-cc-mastercard"></span>
+                                <span class="fa fa-cc-visa"></span>
+                                <span class="fa fa-paypal"></span>
+                                <span class="fa fa-cc-discover"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/js/bootstrap.js"></script>
+    <!-- SmartMenus jQuery plugin -->
+    <script type="text/javascript" src="~/js/jquery.smartmenus.js"></script>
+    <!-- SmartMenus jQuery Bootstrap Addon -->
+    <script type="text/javascript" src="~/js/jquery.smartmenus.bootstrap.js"></script>
+    <!-- To Slider JS -->
+    <script src="js/sequence.js"></script>
+    <script src="js/sequence-theme.modern-slide-in.js"></script>
+    <!-- Product view slider -->
+    <script type="text/javascript" src="~/js/jquery.simpleGallery.js"></script>
+    <script type="text/javascript" src="~/js/jquery.simpleLens.js"></script>
+    <!-- slick slider -->
+    <script type="text/javascript" src="~/js/slick.js"></script>
+    <!-- Price picker slider -->
+    <script type="text/javascript" src="~/js/nouislider.js"></script>
+    <!-- Custom js -->
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

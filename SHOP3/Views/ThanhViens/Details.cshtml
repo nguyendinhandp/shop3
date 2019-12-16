@@ -1,0 +1,59 @@
+﻿@model SHOP3.Models.ThanhVien
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Thông Tin Tài Khoản";
+    if ((Context.Session.GetInt32("MaTv") == 1))
+    {
+        Layout = "_Admin";
+    }
+    else
+    {
+        Layout = "_KhachHang";
+    }
+
+}
+<div class="container" style="float: left;  position: relative;    left:10%;">
+    <h4 style="margin-left:40%">Thông Tin Tài Khoản Cá Nhân</h4>
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <td>Họ Tên: </td>
+            <td> @Html.DisplayFor(model => model.TenTv)</td>
+        </tr>
+        <tr>
+            <td>Giới tính: </td>
+            <td> @Html.DisplayFor(model => model.GioiTinh)</td>
+        </tr>
+        <tr>
+            <td>Ngày Sinh: </td>
+            <td> @Html.DisplayFor(model => model.NgaySinh)</td>
+        </tr>
+        <tr>
+            <td>Địa Chỉ: </td>
+            <td> @Html.DisplayFor(model => model.DiaChi)</td>
+        </tr>
+        <tr>
+            <td>SĐT: </td>
+            <td> @Html.DisplayFor(model => model.DienThoai)</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td> @Html.DisplayFor(model => model.Email)</td>
+        </tr>
+        <tr>
+            <td>Tên Đăng Nhập: </td>
+            <td> @Html.DisplayFor(model => model.TaiKhoan)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><a asp-action="Edit" asp-controller="ThanhViens" asp-route-id="@Model.MaTv" style="color: red"> <strong>Sửa Thông Tin</strong></a></td>
+            
+
+        </tr>
+
+    </table>
+   
+   
+</div>
