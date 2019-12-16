@@ -50,7 +50,7 @@ namespace SHOP3.Models
         {
             get
             {
-                string imagelink = "http://www.shop3.somee.com/images/" + Hinh;
+                string imagelink = "http://www.shop3.somee.com/img/" + Hinh;
                 return imagelink;
             }
         }

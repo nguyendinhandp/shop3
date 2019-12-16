@@ -40,29 +40,24 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
+    <!-- Mailchimp -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
 
+        #mc_embed_signup {
+            background: #fff;
+            clear: left;
+            font: 14px Helvetica,Arial,sans-serif;
+            width: 300px;
+        }
+    </style>
+    <!-- thong bao khi co binh luan-->
+    <meta content="552531752256916" property="fb:app_id" />
+    <meta content="A1u0G8Y4l63yeOgyo1MFrUr" property="fb:admins" />
 
 </head>
 <body>
-    <!--to top-->
-    <button onclick="topFunction()" id="myBtn"></button>
-    <script>
-        var mybutton = document.getElementById("myBtn");
-        window.onscroll = function () { scrollFunction() };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-        }
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
-    <!-- / to top-->
+   
     <!-- Start header section -->
     <header id="aa-header">
         <!-- start header top  -->
@@ -145,7 +140,7 @@
                                     <span class="fa fa-shopping-cart"></span>
                                     <p><strong>Shop</strong>3 <span>Shop Giày Nam</span></p>
                                 </a>
-                                
+
                             </div>
                             <!-- / logo  -->
                             <!-- cart box -->
@@ -153,9 +148,9 @@
                                 <a class="aa-cart-link" asp-action="Index" asp-controller="Cart">
                                     <span class="fa fa-shopping-basket"></span>
                                     <span class="aa-cart-title">GIỎ HÀNG</span>
-                                   
+
                                 </a>
-                                
+
                             </div>
                             <!-- / cart box -->
                             <!-- search box -->
@@ -250,6 +245,65 @@
 
 
     <footer id="aa-footer">
+
+
+        <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <script>
+            $(document).ready(function () {
+                $('#send-message').click(function () {
+                    $(this).fadeOut();
+                    setTimeout(function () {
+                        $('#fa-message')
+                            .css({
+                                bottom: '0px'
+                            });
+                    }, 500);
+                });
+                $('#fa-message .heading').click(function () {
+                    $('#fa-message').css({
+                        bottom: '-333px'
+                    });
+                    setTimeout(function () {
+                        $('#send-message').fadeIn();
+                    }, 1000);
+                });
+                $.scrolltop();
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+        <script type="text/javascript">
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '2433516863577384',
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v5.0'
+                });
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <!-- Your customer chat code -->
+        <div class="fb-customerchat"
+             attribution=setup_tool
+             page_id="100776611402531"
+             theme_color="#13cf13"
+             logged_in_greeting="Xin Chào! Chúng tôi có thể hỗ trợ gì cho bạn?"
+             logged_out_greeting="Xin Chào! Chúng tôi có thể hỗ trợ gì cho bạn?">
+        </div>
+        <!--to top-->
+        <button onclick="topFunction()" id="myBtn"></button>
+        <!-- Share Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5de5f2acbef31da9"></script>
+
+
         <!-- footer bottom -->
         <div class="aa-footer-top">
             <div class="container">
@@ -284,7 +338,7 @@
                                                 <p><span class="fa fa-envelope"></span>shop3@gmail.com</p>
                                             </address>
                                             <div class="aa-footer-social">
-                                                <a href="#"><span class="fa fa-facebook"></span></a>
+                                                <a href="https://www.facebook.com/EcommerceNhom3-100776611402531"><span class="fa fa-facebook"></span></a>
                                                 <a href="#"><span class="fa fa-twitter"></span></a>
                                                 <a href="#"><span class="fa fa-google-plus"></span></a>
                                                 <a href="#"><span class="fa fa-youtube"></span></a>
@@ -298,6 +352,41 @@
                 </div>
             </div>
         </div>
+        <div class="clearfix"> </div>
+
+        <!-- Begin Mailchimp Signup Form -->
+        <form class="mc-trial row" action="https://somee.us4.list-manage.com/subscribe/post?u=f877dd4aceb6374fb11645685&amp;id=12e1ca0ec2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+            <p style="text-align:center; margin-top:50px; margin-bottom:20px; color: yellow; text-decoration: underline">Đăng ký nhận thông tin khuyến mãi từ cửa hàng</p>
+            <div class="form-group col-md-3 col-md-offset-2 col-sm-4">
+                <div class=" controls">
+                    <input name="NAME" placeholder="Nhập Tên Của Bạn" class="form-control" type="text">
+                </div>
+            </div>
+            <!-- End email input -->
+            <div class="form-group col-md-3 col-sm-4">
+                <div class=" controls">
+                    <input name="EMAIL" placeholder="Nhập Email Của Bạn" class="form-control" type="email">
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <p>
+                    <button type="submit" class="btn btn-block btn-submit" name="subscribe" style="width: 150px">
+                        Đăng Ký <i class="fa fa-arrow-right"></i>
+                    </button>
+                </p>
+            </div>
+            <div class="clearfix"> </div>
+            <div id="mce-responses" style="color: aqua; margin-left:20%">
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_f877dd4aceb6374fb11645685_12e1ca0ec2" tabindex="-1" value=""></div>
+        </form>
+        <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+        <script type='text/javascript'>(function ($) { window.fnames = new Array(); window.ftypes = new Array(); fnames[1] = 'NAME'; ftypes[1] = 'text'; fnames[0] = 'EMAIL'; ftypes[0] = 'email'; }(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+        <!--End mc_embed_signup-->
+
+        <div class="clearfix"> </div>
         <!-- footer-bottom -->
         <div class="aa-footer-bottom">
             <div class="container">
@@ -316,9 +405,10 @@
                 </div>
             </div>
         </div>
+
     </footer>
 
-    
+
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -337,7 +427,29 @@
     <script type="text/javascript" src="~/js/slick.js"></script>
     <!-- Price picker slider -->
     <script type="text/javascript" src="~/js/nouislider.js"></script>
-    <!-- Custom js -->
+
+    <!--to top-->
+    <script>
+        var mybutton = document.getElementById("myBtn");
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <!-- / to top-->
+
+    
+
+
 
     @RenderSection("Scripts", required: false)
 </body>
