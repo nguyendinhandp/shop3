@@ -16,7 +16,7 @@
                             <form method="post" asp-controller="ThanhViens" asp-action="Login" class="aa-login-form">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <label asp-for="TaiKhoan">Tên Đăng Nhập<span>*</span></label>
-                                <input asp-for="TaiKhoan" placeholder="Username or email">
+                                <input asp-for="TaiKhoan" placeholder="Username">
                                 <span asp-validation-for="TaiKhoan"></span>
 
                                 <label asp-for="MatKhau">Mật Khẩu<span>*</span></label>

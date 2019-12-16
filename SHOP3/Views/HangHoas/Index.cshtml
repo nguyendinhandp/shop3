@@ -32,6 +32,9 @@
                     Giá Sau Khi Giảm
                 </th>
                 <th>
+                    Mô tả
+                </th>
+                <th>
                     Loại
                 </th>
                 <th>
@@ -51,6 +54,7 @@
                 <td>@item.DonGia</td>
                 <td>@item.GiamGia</td>
                 <td>@item.Price</td>
+                <td>@item.MoTa</td>
                 @{
                     if (item.MaLoai == 1)
                     {
@@ -84,10 +88,12 @@
                         <td> Doremon </td>
                     }
                 }
+
+
                 <td>
                     <a asp-controller="HangHoas" asp-action="Edit" asp-route-id="@item.MaHh">Sửa</a> |
 
-                    <a asp-controller="HangHoas" asp-action="DeleteHangHoa" asp-route-id="@item.MaHh" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">Xóa</a>
+                    <a asp-controller="HangHoas" asp-action="Delete" asp-route-id="@item.MaHh" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">Xóa</a>
                 </td>
             </tr>
             }

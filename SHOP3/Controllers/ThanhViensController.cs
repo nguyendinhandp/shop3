@@ -70,7 +70,7 @@ namespace SHOP3.Controllers
         // POST: ThanhViens/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, int ltv, [Bind("MaTv,TenTv,GioiTinh,NgaySinh,DiaChi,LoaiTv,DienThoai,Email,TaiKhoan,MatKhau")] ThanhVien thanhVien)
+        public async Task<IActionResult> Edit(int id, [Bind("MaTv,TenTv,GioiTinh,NgaySinh,DiaChi,LoaiTv,DienThoai,Email,TaiKhoan,MatKhau")] ThanhVien thanhVien)
         {
             if (id != thanhVien.MaTv)
             {
@@ -83,7 +83,7 @@ namespace SHOP3.Controllers
                 {
                     _context.Update(thanhVien);
                     await _context.SaveChangesAsync();
-                    HttpContext.Session.Set("MaTv", thanhVien);
+                   
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -96,10 +96,10 @@ namespace SHOP3.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index", "ThanhViens");
+                return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("Index", "ThanhViens");
+            return View(thanhVien);
         }
         private bool ThanhVienExists(int id)
         {

@@ -51,7 +51,7 @@ namespace SHOP3.Controllers
                 {
                     foreach (var item in myfile)
                     {
-                        string url = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", item.FileName);
+                        string url = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", item.FileName);
                         using (var f = new FileStream(url, FileMode.Create))
                         {
                             item.CopyTo(f);
@@ -100,7 +100,7 @@ namespace SHOP3.Controllers
                     {
                         foreach (var item in myfile)
                         {
-                            string url = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", item.FileName);
+                            string url = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", item.FileName);
                             using (var f = new FileStream(url, FileMode.Create))
                             {
                                 item.CopyTo(f);
@@ -199,7 +199,37 @@ namespace SHOP3.Controllers
             return View();
 
         }
-        
+
+        [Route("nobita")]
+        public IActionResult ShowNobita()
+        {
+
+            return View();
+
+        }
+        [Route("xuka")]
+        public IActionResult ShowXuka()
+        {
+
+            return View();
+
+        }
+        [Route("chaien")]
+        public IActionResult ShowChaien()
+        {
+
+            return View();
+
+        }
+        [Route("doremon")]
+        public IActionResult ShowDoremon()
+        {
+
+            return View();
+
+        }
+
+
 
     }
 }
