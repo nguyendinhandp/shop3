@@ -1,7 +1,94 @@
-﻿
+﻿@model IEnumerable<SHOP3.Models.ThanhVien>
+@using Microsoft.AspNetCore.Http
 @{
+
     ViewData["Title"] = "Index";
+    
+    Layout = "_Admin";
+   
 }
 
-<h2>Index</h2>
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    
+    <h3  style="width:100%; text-align: center">TÀI KHOẢN TRANG</h3>
+    <p>
+        <a asp-action="Create" asp-controller="ThanhViens" class="w3-bar-item w3-button w3-padding w3-pale-red"><i class="fa fa-plus-square"></i> Thêm Tài Khoản</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Tên TK
+                </th>
+                <th>
+                    Họ Tên
+                </th>
+                <th>
+                    Giới Tính
+                </th>
+                <th>
+                    Ngày Sinh
+                </th>
+                <th>
+                    Địa Chỉ
+                </th>
+                <th>
+                    SĐT
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Loại TK
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td >
+                        @Html.DisplayFor(modelItem => item.TaiKhoan)
+                    </td>
+                    <td >
+                        @Html.DisplayFor(modelItem => item.TenTv)
+                    </td>
+                    <td >
+                        @Html.DisplayFor(modelItem => item.GioiTinh)
+                    </td>
+                    <td >
+                        @Html.DisplayFor(modelItem => item.NgaySinh)
+                    </td>
+                    <td style="width: 200px">
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DienThoai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    @{
+                        if (item.LoaiTv == 1)
+                        {
+                            <td> Admin</td>
+                        }
+                        else
+                        {
+                            <td> Khách hàng</td>
+                        }
+                    }
+                    <td>
+                        <a asp-controller="ThanhViens" asp-action="Edit" asp-route-id="@item.MaTv" style="color:red">Sửa</a> |
 
+                        <a asp-action="Delete" asp-controller="ThanhViens" asp-route-id="@item.MaTv" onclick="return confirm('Bạn có chắc muốn xóa Tài khoản này ?');" style="color:blue">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

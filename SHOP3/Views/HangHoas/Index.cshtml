@@ -1,7 +1,96 @@
-﻿
+﻿@model IEnumerable<SHOP3.Models.HangHoa>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Hàng Hóa";
 }
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">Hàng Hóa</h3>
+    
+    <a asp-action="Create" asp-controller="HangHoas" class="w3-bar-item w3-button w3-padding w3-pale-green"><i class="fa fa-plus-square"></i> Thêm Hàng Hóa</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Hình
+                </th>
+                <th>
+                    Tên Sản Phẩm
+                </th>
+                <th>
+                    Đơn Giá
+                </th>
+                <th>
+                    Giảm Giá
+                </th>
+                <th>
+                    Giá Sau Khi Giảm
+                </th>
+                <th>
+                    Loại
+                </th>
+                <th>
+                    Thương Hiệu
+                </th>
+                <th>
+                    Edit
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td class="text-center"><img src="~/img/@item.Hinh" width="50" height="40" /> </td>
+                <td>@item.TenHh</td>
+                <td>@item.DonGia</td>
+                <td>@item.GiamGia</td>
+                <td>@item.Price</td>
+                @{
+                    if (item.MaLoai == 1)
+                    {
+                        <td>Giày Da</td>
+                    }
+                    else if (item.MaLoai == 2)
+                    {
+                        <td> Giày Thể Thao </td>
+                    }
+                    else if (item.MaLoai == 3)
+                    {
+                        <td> Giày Đá Bóng </td>
+                    }
+                }
 
-<h2>Index</h2>
+                @{
+                    if (item.MaTH == 1)
+                    {
+                        <td>Nobita</td>
+                    }
+                    else if (item.MaTH == 2)
+                    {
+                        <td> XuKa </td>
+                    }
+                    else if (item.MaTH == 3)
+                    {
+                        <td> Chaien </td>
+                    }
+                    else if (item.MaTH == 4)
+                    {
+                        <td> Doremon </td>
+                    }
+                }
+                <td>
+                    <a asp-controller="HangHoas" asp-action="Edit" asp-route-id="@item.MaHh">Sửa</a> |
 
+                    <a asp-controller="HangHoas" asp-action="DeleteHangHoa" asp-route-id="@item.MaHh" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">Xóa</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>

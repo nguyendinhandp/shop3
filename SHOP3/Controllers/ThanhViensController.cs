@@ -70,7 +70,7 @@ namespace SHOP3.Controllers
         // POST: ThanhViens/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, int ltv, [Bind("MaTv,TenTv,GioiTinh,NgaySinh,DiaChi,LoaiTv,DienThoai,Email,TaiKhoan")] ThanhVien thanhVien)
+        public async Task<IActionResult> Edit(int id, int ltv, [Bind("MaTv,TenTv,GioiTinh,NgaySinh,DiaChi,LoaiTv,DienThoai,Email,TaiKhoan,MatKhau")] ThanhVien thanhVien)
         {
             if (id != thanhVien.MaTv)
             {
@@ -81,8 +81,6 @@ namespace SHOP3.Controllers
             {
                 try
                 {
-                    // Sửa lại update
-                    thanhVien.LoaiTv = ltv;
                     _context.Update(thanhVien);
                     await _context.SaveChangesAsync();
                     HttpContext.Session.Set("MaTv", thanhVien);
@@ -98,10 +96,10 @@ namespace SHOP3.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "ThanhViens");
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "ThanhViens");
         }
         private bool ThanhVienExists(int id)
         {
@@ -170,25 +168,7 @@ namespace SHOP3.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Customer()
-        {
-            List<ThanhVien> Dstv = new List<ThanhVien>();
-            Dstv = _context.ThanhViens.Where(h => h.LoaiTv == 3).ToList();
-            return View(Dstv.Select(h => new ThanhVien
-            {
-                TenTv = h.TenTv,
-                MaTv = h.MaTv,
-                GioiTinh = h.GioiTinh,
-                NgaySinh = h.NgaySinh,
-                DiaChi = h.DiaChi,
-                DienThoai = h.DienThoai,
-                Email = h.Email,
-
-                LoaiTv = h.LoaiTv,
-                TaiKhoan = h.TaiKhoan,
-                MatKhau = h.MatKhau
-            }));
-        }
+      
         public IActionResult Admin()
         {
             List<ThanhVien> Dstv = new List<ThanhVien>();
