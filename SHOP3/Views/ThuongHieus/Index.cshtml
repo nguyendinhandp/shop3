@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SHOP3.Models.ThuongHieu>
+@{
+    ViewData["Title"] = "Thương Hiệu";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">Thương Hiệu</h3>
+
+    <a asp-action="Create" asp-controller="ThuongHieus" class="w3-bar-item w3-button w3-padding w3-pale-green"><i class="fa fa-plus-square"></i> Thêm Thương Hiệu</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Mã Thương Hiệu
+                </th>
+                <th>
+                    Tên Thương Hiệu
+                </th>
+                
+                <th>
+                    Edit
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaTH</td>
+                    <td>@item.TenTH</td>
+                   
+                    <td>
+                        <a asp-controller="ThuongHieus" asp-action="Edit" asp-route-id="@item.MaTH">Sửa</a> |
+
+                        <a asp-controller="ThuongHieus" asp-action="Delete" asp-route-id="@item.MaTH" onclick="return confirm('Bạn có chắc muốn xóa ?');">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

@@ -46,7 +46,7 @@
                                                     <form asp-action="Remove" asp-controller="Cart" asp-route-id="@item.MaHh" method="get">
                                                         <input type="hidden" name="id" value="@item.MaHh" />
                                                         <input type="hidden" name="s" value="@item.Size" />
-                                                        
+
                                                         <button type="submit" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</button>
                                                     </form>
                                                 </td>
@@ -59,7 +59,7 @@
                         </form>
                         <!-- Cart Total view -->
                         <div class="cart-view-total">
-                            
+
                             <table class="aa-totals-table">
                                 <tbody>
 
@@ -70,6 +70,31 @@
                                 </tbody>
                             </table>
                             <a href="#" class="aa-cart-view-btn">Thanh Toán</a>
+                        </div>
+                        <!-- paypal -->
+                        <div>
+                            <p style="color: brown; font-weight:bolder">Thanh toán trực tuyến: </p>
+                            <br />
+                            <form method="post" action="@ViewBag.payPalConfig.PostUrl">
+                                <input type="hidden" name="upload" value="1" />
+                                <input type="hidden" name="return" value="@ViewBag.payPalConfig.ReturnUrl" />
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="business" value="@ViewBag.payPalConfig.Business" />
+                                @{
+                                    var index = 1;
+                                }
+                                @foreach (var product in ViewBag.cart)
+                                {
+                                    double Price = product.DonGia / 23000;
+                                    <input type="hidden" name="item_number_@index" value="@product.MaHh" />
+                                    <input type="hidden" name="item_name_@index" value="@product.TenHh" />
+                                    <input type="hidden" name="amount_@index" value="@Price" />
+                                    <input type="hidden" name="quantity_@index" value="@product.SoLuong" />
+                                    index++;
+                                }
+                                <input type="image" style="width:180px; height:50px;" src="~/img/paypalco.png">
+                            </form>
+                            <br />
                         </div>
                     </div>
                 </div>

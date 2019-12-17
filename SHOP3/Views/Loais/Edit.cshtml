@@ -1,0 +1,43 @@
+﻿@model SHOP3.Models.Loai
+@{
+    ViewData["Title"] = "Edit";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+
+        .mainmenu {
+            margin-left: 26%;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">CHỈNH SỬA LOẠI HH</h3>
+    <hr />
+    <div class="row mainmenu">
+        <div class="col-md-8">
+            <form asp-action="Edit" asp-controller="Loais" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    Mã Loại
+                    <input asp-for="MaLoai" class="form-control" readonly />
+
+                </div>
+                <div class="form-group">
+                    Tên Loại Hàng Hóa
+                    <input asp-for="TenLoai" class="form-control" />
+                    <span asp-validation-for="TenLoai" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Lưu" class="w3-bar-item w3-padding w3-pale-red" />
+                    <a asp-action="Index" asp-controller="Loais" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

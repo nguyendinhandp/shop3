@@ -1,8 +1,4 @@
 ﻿@{
-    ViewData["Title"] = "Trang chủ";
-
-}
-@{
     MyDbContext db = new MyDbContext();
     var thethao = db.HangHoas.Where(p => p.MaLoai == 2).OrderByDescending(x => x.MaHh).Take(4);
 

@@ -1,0 +1,44 @@
+﻿@model SHOP3.Models.ThuongHieu
+@{
+    ViewData["Title"] = "Edit";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+
+        .mainmenu {
+            margin-left: 26%;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">CHỈNH SỬA THƯƠNG HIỆU</h3>
+    <hr />
+    <div class="row mainmenu">
+        <div class="col-md-8">
+            <form asp-action="Edit" asp-controller="ThuongHieus" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="MaTH" />
+                <div class="form-group">
+                    Mã Thương Hiệu
+                    <input asp-for="MaTH" class="form-control" readonly/>
+ 
+                </div>
+                <div class="form-group">
+                    Tên Thương Hiệu
+                    <input asp-for="TenTH" class="form-control" />
+                    <span asp-validation-for="TenTH" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Lưu" class="w3-bar-item w3-padding w3-pale-red" />
+                    <a asp-action="Index" asp-controller="ThuongHieus" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

@@ -20,8 +20,8 @@ namespace SHOP3.Controllers
         // GET: ThuongHieus
         public IActionResult Index()
         {
-            var n = _context.ThuongHieus.ToList();
-            return View(n);
+            var t = _context.ThuongHieus.ToList();
+            return View(t);
         }
 
         // GET: ThuongHieus/Details/5
@@ -39,12 +39,15 @@ namespace SHOP3.Controllers
         // POST: ThuongHieus/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult<ThuongHieu>> Create(ThuongHieu thuongHieu)
+        public async Task<IActionResult> Create([Bind("MaTH,TenTH")] ThuongHieu thuongHieu)
         {
-            _context.ThuongHieus.Add(thuongHieu);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetThuongHieu", new { id = thuongHieu.MaTH }, thuongHieu);
+            if (ModelState.IsValid)
+            {
+                _context.Add(thuongHieu);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(thuongHieu);
         }
 
         private bool ThuongHieuExists(int id)
@@ -55,41 +58,49 @@ namespace SHOP3.Controllers
         // GET: ThuongHieus/Edit/5
         public IActionResult Edit(int id)
         {
-            return View();
+            ThuongHieu thuongHieu = _context.ThuongHieus.Where(p => p.MaTH == id).First();
+
+            return View(thuongHieu);
         }
 
         // POST: ThuongHieus/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, ThuongHieu thuongHieu)
+        public async Task<IActionResult> Edit(int id, [Bind("MaTH,TenTH")] ThuongHieu thuongHieu)
         {
             if (id != thuongHieu.MaTH)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(thuongHieu).State = EntityState.Modified;
-
-            try
+            if (ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ThuongHieuExists(id))
+                try
                 {
-                    return NotFound();
+                    
+                    _context.Update(thuongHieu);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!ThuongHieuExists(thuongHieu.MaTH))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                return RedirectToAction(nameof(Index));
             }
+         
 
-            return NoContent();
+            return View(thuongHieu);
         }
 
         // GET: ThuongHieus/Delete/5
+        [HttpGet]
         public async Task<ActionResult<ThuongHieu>> Delete(int id)
         {
             var thuongHieu = await _context.ThuongHieus.FindAsync(id);
@@ -103,5 +114,7 @@ namespace SHOP3.Controllers
 
             return thuongHieu;
         }
+        
+       
     }
 }

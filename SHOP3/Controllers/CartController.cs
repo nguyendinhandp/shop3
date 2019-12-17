@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SHOP3.Models;
+using SHOP3.Paypal;
 
 namespace SHOP3.Controllers
 {
@@ -30,11 +31,13 @@ namespace SHOP3.Controllers
                 var cart = Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart");
 
                 ViewBag.cart = cart;
-                ViewBag.tongsl = cart.Sum(item => item.SoLuong);
+                
                 ViewBag.total = cart.Sum(item => item.DonGia * item.SoLuong);
 
             }
-            
+            PayPalConfig payPalConfig = PayPalService.GetPayPalConfig();
+            ViewBag.payPalConfig = payPalConfig;
+
             return View();
         }
         // mua

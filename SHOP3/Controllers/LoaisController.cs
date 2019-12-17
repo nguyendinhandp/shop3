@@ -40,12 +40,15 @@ namespace SHOP3.Controllers
         // POST: Loais/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult<Loai>> Create(Loai loai)
+        public async Task<IActionResult> Create([Bind("MaLoai,TenLoai")] Loai loai)
         {
-            _context.Loais.Add(loai);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetLoai", new { id = loai.MaLoai }, loai);
+            if (ModelState.IsValid)
+            {
+                _context.Add(loai);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(loai);
         }
 
         // GET: Loais/Edit/5
@@ -85,13 +88,14 @@ namespace SHOP3.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction("Index", "Home");
+            return View(loai);
         }
 
         // GET: Loais/Delete/5
+        [HttpGet]
         public async Task<ActionResult<Loai>> Delete(int id)
         {
             var loai = await _context.Loais.FindAsync(id);
