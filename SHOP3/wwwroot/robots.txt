@@ -1,0 +1,5 @@
+User-Agent: *
+
+Disallow: /ThanhViens/
+
+Sitemap: http://www.shop3.somee.com/sitemap.xml
