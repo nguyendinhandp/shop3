@@ -21,12 +21,20 @@ namespace SHOP3.Models
 
         public virtual DbSet<HangHoa> HangHoas { get; set; }
         public virtual DbSet<ThuongHieu> ThuongHieus { get; set; }
+        public virtual DbSet<HoaDon> HoaDon { get; set; }
+        public virtual DbSet<ChiTietHoaDon> ChiTietHoaDon { get; set; }
 
 
         public virtual DbSet<ThanhVien> ThanhViens { get; set; }
         public virtual DbSet<Loai> Loais { get; set; }
 
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<ChiTietHoaDon>().HasKey(table => new {
+                table.MaHD,
+                table.MaHH
+            });
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

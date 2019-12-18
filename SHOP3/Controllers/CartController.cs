@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SHOP3.Common;
 using SHOP3.Models;
 using SHOP3.Paypal;
 
@@ -18,6 +19,40 @@ namespace SHOP3.Controllers
         {
             _context = new MyDbContext();
         }
+        [HttpGet]
+        [Route("Payment")]
+        [Auth]
+        public async Task<IActionResult> Payment()
+        {
+            var cart = this.HttpContext.Session.Get<List<Item>>("cart");
+            if(cart == null)
+            {
+                return Redirect("/Cart/Index");
+            }
+            var khachHang = this.HttpContext.Session.GetInt32("MaTv");
+            var hoaDon = new HoaDon
+            {
+                NgayTao = DateTime.Now,
+                MaKhachHang = khachHang.Value,
+                XacNhan = false
+            };
+            var master = await this._context.HoaDon.AddAsync(hoaDon);
+            await this._context.ChiTietHoaDon.AddRangeAsync(cart.Select(x =>
+            {
+                return new ChiTietHoaDon
+                {
+                    Gia = (int)x.DonGia,
+                    MaHD = hoaDon.MaHD,
+                    SoLuong = x.SoLuong,
+                    MaHH = x.MaHh
+                };
+            }));
+            int change = await this._context.SaveChangesAsync();
+            this.HttpContext.Session.Remove("cart");
+            return Redirect("/Cart/Index");
+
+        }
+
         // GET: Cart
         [Route("index")]
         public ActionResult Index()
