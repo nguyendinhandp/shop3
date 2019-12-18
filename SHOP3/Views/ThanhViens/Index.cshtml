@@ -60,8 +60,9 @@
                     <td >
                         @Html.DisplayFor(modelItem => item.GioiTinh)
                     </td>
-                    <td >
-                        @Html.DisplayFor(modelItem => item.NgaySinh)
+                    <td>
+                        @item.NgaySinh.ToString("dd/MM/yyyy ")
+                       
                     </td>
                     <td style="width: 200px">
                         @Html.DisplayFor(modelItem => item.DiaChi)

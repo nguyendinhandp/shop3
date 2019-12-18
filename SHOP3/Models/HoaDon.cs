@@ -15,7 +15,7 @@ namespace SHOP3.Models
         public int MaHD { get; set; }
 
         public int MaKhachHang { get; set; }
-        [ForeignKey("MaTv")]
+        
         public ThanhVien ThanhVien { get; set; }
 
         public DateTime NgayTao { get; set; }

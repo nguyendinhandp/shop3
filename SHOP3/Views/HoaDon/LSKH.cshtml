@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewData["Title"] = "Lịch Sử Mua Hàng";
+    Layout = "_KhachHang";
+}
+@using SHOP3.Models;
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+           
+            <th>
+                Số Lượng
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Ngày
+            </th>
+            <th>
+                Tác vụ
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (HoaDon item in this.ViewBag.HoaDon)
+        {
+            var soLuong = 0;
+            var tongTien = 0;
+            var trangThai = item.XacNhan ? "Đã xác nhận" : "Chờ xử lý";
+            foreach (var detail in item?.ChiTietHoaDon ?? new List<ChiTietHoaDon>())
+            {
+                soLuong += detail.SoLuong;
+                tongTien += detail.Gia;
+            }
+            <tr>
+                <td>@item.MaHD</td>
+                
+                <td>@soLuong</td>
+                <td>@tongTien.ToString("#,##0") VNĐ</td>
+                <td>@trangThai</td>
+                <td>@item.NgayTao.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a href="#" class="btn btn-primary" onclick="Detail(@item.MaHD)">Chi tiết</a>
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Mặt hàng</td>
+                            <td>Số lượng</td>
+                            <td>Thành tiền</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tdata"></tbody>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function Detail(maHD) {
+        $.get(
+            "/HoaDon/Detail",
+            {maHD},
+            function (result) {
+                $("#tdata").html('');
+                result.forEach(item => {
+                    $("#tdata").append(
+                        `<tr>
+                            <td>${item.hangHoa.tenHh}</td>
+                            <td>${item.soLuong}</td>
+                            <td>${item.gia * item.soLuong}</td>
+                        </tr>`
+                    )
+                });
+                $(".modal").modal();
+            }
+        )
+    }
+</script>
+

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SHOP3.Common;
 using SHOP3.Models;
@@ -95,6 +96,33 @@ namespace SHOP3.Controllers
                     XacNhan = hd.XacNhan
                 }
                 ).ToList();
+            foreach (var item in hoaDon)
+            {
+                item.ChiTietHoaDon = _context.ChiTietHoaDon.Where(x => x.MaHD == item.MaHD).ToList();
+            }
+            this.ViewBag.HoaDon = hoaDon;
+            return View();
+        }
+
+        [HttpGet]
+        [Route("LSKH")]
+        [Auth]
+        public async Task<IActionResult> LSKH()
+        {
+           
+            var hoaDon = _context.HoaDon.Join(
+                _context.ThanhViens,
+                hd => hd.MaKhachHang,
+                tv => tv.MaTv,
+                (hd, tv) => new HoaDon
+                {
+                    ThanhVien = tv,
+                    MaHD = hd.MaHD,
+                    MaKhachHang = hd.MaKhachHang,
+                    NgayTao = hd.NgayTao,
+                    XacNhan = hd.XacNhan
+                }
+                ).Where(p => p.MaKhachHang == HttpContext.Session.GetInt32("MaTv")).ToList();
             foreach (var item in hoaDon)
             {
                 item.ChiTietHoaDon = _context.ChiTietHoaDon.Where(x => x.MaHD == item.MaHD).ToList();
