@@ -39,8 +39,8 @@ namespace SHOP3.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("workstation id=SHOP3DB.mssql.somee.com;packet size=4096;user id=shop3_SQLLogin_1;pwd=qcmusmkztn;data source=SHOP3DB.mssql.somee.com;persist security info=False;initial catalog=SHOP3DB");
-              // optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=SHOP3;Integrated Security=True");
+                //optionsBuilder.UseSqlServer("workstation id=SHOP3DB.mssql.somee.com;packet size=4096;user id=shop3_SQLLogin_1;pwd=qcmusmkztn;data source=SHOP3DB.mssql.somee.com;persist security info=False;initial catalog=SHOP3DB");
+              optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=SHOP3;Integrated Security=True");
             }
         }
 

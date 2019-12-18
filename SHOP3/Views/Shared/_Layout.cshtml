@@ -119,7 +119,7 @@
                                     }
 
                                     <li class="hidden-xs"><a asp-action="Index" asp-controller="Cart">Giỏ Hàng</a></li>
-                                    <li class="hidden-xs"><a href="checkout.html">Thanh Toán</a></li>
+                                    
                                     @if (Context.Session.GetInt32("MaTv") == null)
                                     {
                                         <li><a asp-action="Login" asp-controller="ThanhViens">Đăng Nhập</a></li>
@@ -310,8 +310,7 @@
         </div>
         <!--to top-->
         <button onclick="topFunction()" id="myBtn"></button>
-        <!-- Share Go to www.addthis.com/dashboard to customize your tools -->
-        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5de5f2acbef31da9"></script>
+        
 
 
         <!-- footer bottom -->

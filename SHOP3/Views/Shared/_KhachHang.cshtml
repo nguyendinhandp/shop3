@@ -113,7 +113,7 @@
                                     }
 
                                     <li class="hidden-xs"><a asp-action="Index" asp-controller="Cart">Giỏ Hàng</a></li>
-                                    <li class="hidden-xs"><a href="checkout.html">Thanh Toán</a></li>
+                                  
                                     @if (Context.Session.GetInt32("MaTv") == null)
                                     {
                                         <li><a asp-action="Login" asp-controller="ThanhViens">Đăng Nhập</a></li>
