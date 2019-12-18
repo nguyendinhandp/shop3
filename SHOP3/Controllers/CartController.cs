@@ -37,6 +37,7 @@ namespace SHOP3.Controllers
                 XacNhan = false
             };
             var master = await this._context.HoaDon.AddAsync(hoaDon);
+            _context.SaveChanges();
             await this._context.ChiTietHoaDon.AddRangeAsync(cart.Select(x =>
             {
                 return new ChiTietHoaDon

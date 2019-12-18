@@ -68,12 +68,8 @@ namespace SHOP3.Controllers
         {
             if(MaHD != null)
             {
-                var hd = new HoaDon
-                {
-                    MaHD = MaHD.Value,
-                    XacNhan = false,
-                    MaKhachHang = -1
-                };
+                var hd = _context.HoaDon.FirstOrDefault(x=>x.MaHD == MaHD);
+                hd.MaKhachHang = -1; //delete
                 _context.HoaDon.Update(hd);
                 await _context.SaveChangesAsync();
             }
