@@ -15,9 +15,6 @@ namespace SHOP3.Models
         public int MaHH { get; set; }
         public int SoLuong { get; set; }
         public int Gia { get; set; }
-
-        [ForeignKey("MaHD")]
-        public HoaDon HoaDon { get; set; }
         [ForeignKey("MaHH")]
         public HangHoa HangHoa { get; set; }
     }
